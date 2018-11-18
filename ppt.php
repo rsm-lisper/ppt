@@ -4,7 +4,9 @@ namespace ppt;
 
 
 /**
- * @param mixed $a
+ * Almost like print_r but better, and it returns instead of printing.
+ *
+ * @param mixed $a Argument to format as a string.
  * @return string
  */
 function format_r ($a) { return
@@ -16,10 +18,12 @@ function format_r ($a) { return
 
 
 /**
- * @param string $name
- * @param mixed $a
- * @param mixed $b
- * @return bool|string
+ * $a === $b comparison as a function.
+ *
+ * @param string $name Name of the test.
+ * @param mixed $a Argument to compare against $b.
+ * @param mixed $b Argument to compare against $a.
+ * @return bool|string Returns true on success or string describing problem.
  */
 function do_test ($name, $a, $b) { return
     ($a === $b ? true :

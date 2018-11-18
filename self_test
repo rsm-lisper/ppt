@@ -1,0 +1,6 @@
+#!/bin/sh
+
+php self_test.php
+ex=$?
+if (( $ex == 0)); then echo "SELF TEST OK"; fi
+exit $ex

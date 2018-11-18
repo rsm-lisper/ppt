@@ -1,0 +1,6 @@
+#+TITLE: ppt - Php Pico Tester
+#+AUTHOR: Rafał -rsm- Marek
+
+Php Pico Tester - minimalistyczna biblioteka do testów dla PHP.
+
+/(prace w toku)/

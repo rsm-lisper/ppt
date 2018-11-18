@@ -7,10 +7,10 @@ function test ($a, $b) { return
         $a === $b ;}
 
 
-function test_group ($group_spec) {
+function test_group ($group_name, $group_tests) {
     $all_true = true;
-    $details = [];
-    foreach ($group_spec as $spec) {
+    $details = [$group_name];
+    foreach ($group_tests as $spec) {
         $result = test ($spec[0], $spec[1]) ;
         $all_true = $all_true && $result ;
         $details[] = $result ;}
@@ -21,10 +21,10 @@ function test_all ($test_specs) {
     $all_true = true ;
     $details = [];
     foreach ($test_specs as $spec) {
-        $group_name = array_shift ($spec) ;
-        $result = test_group ($spec) ;
-        $all_true = $all_true && is_bool ($result) ;
-        $details[] = [$group_name, $result] ;}
+        $result = test_group (array_shift ($spec), $spec) ;
+        if (is_array ($result)) {
+            $all_true = false ;
+            $details[] = $result ;}}
     return $all_true ? true : $details ;}
 
 
@@ -37,20 +37,33 @@ function format_r ($a) { return
 
 
 function format_test ($a, $b) { return
-    ($a === $b ? ' ok' :
-     "\n*** ERROR: ". format_r ($a) .' !== '. format_r ($b) ."\n") ;}
+    ($a === $b ? true :
+     "
+---[ERROR]---
+*** NOT EQUAL [A]: ". format_r ($a) ."
+*** NOT EQUAL [B]: ". format_r ($b) ."
+------
+") ;}
 
 
-function format_test_group ($group_spec) {
-    $ret = '';
-    foreach ($group_spec as $spec) {
-        $ret .= format_test ($spec[0], $spec[1]) ;}
-    return $ret ;}
+function format_test_group ($group_name, $group_tests) {
+    $all_true = true ;
+    $details = '-[GROUP: '. $group_name ."]-\n";
+    foreach ($group_tests as $spec) {
+        $result = format_test ($spec[0], $spec[1]) ;
+        if (is_string ($result)) {
+            $all_true = false;
+            $details .= $result ;}}
+    return $all_true ? true : $details ;}
 
 
 function format_test_all ($test_specs) {
-    $ret = '';
+    $all_true = true ;
+    $details = '' ;
     foreach ($test_specs as $spec) {
-        $ret .= '- '. array_shift ($spec) .': '. format_test_group ($spec) ."\n" ;}
-    return $ret ;}
+        $result = format_test_group (array_shift ($spec), $spec) ;
+        if (is_string ($result)) {
+            $all_true = false ;
+            $details .= $result ;}}
+    return $all_true ? true : $details ;}
 

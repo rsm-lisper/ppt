@@ -1,9 +1,14 @@
 {
     "name": "rsm-lisper/ppt",
     "license": "MIT",
+    "authors": [
+	{
+	    "name": "Rafał -rsm- Marek"
+	}
+    ],
     "autoload": {
-	"psr-4": {
-	    "ppt\\": "src/"
+	"psr-0": {
+	    "rsm-lisper\\ppt\\": "src/"
 	}
     }
 }

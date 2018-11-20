@@ -1,14 +1,11 @@
 {
     "name": "rsm-lisper/ppt",
+    "description": "Php Pico Tester - minimalistyczna biblioteka do testów dla PHP."
+    "type": "library",
     "license": "MIT",
     "authors": [
 	{
 	    "name": "Rafał -rsm- Marek"
 	}
-    ],
-    "autoload": {
-	"psr-0": {
-	    "rsm-lisper\\ppt\\": "src/"
-	}
-    }
+    ]
 }

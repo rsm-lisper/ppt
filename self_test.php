@@ -2,7 +2,8 @@
 
 require 'ppt.php' ;
 
-use function ppt\format_r, ppt\do_test, ppt\test_group, ppt\test_all, ppt\exit_nicely ;
+use function rsm_lisper\ppt\format_r, rsm_lisper\ppt\do_test, rsm_lisper\ppt\test_group,
+    rsm_lisper\ppt\test_all, rsm_lisper\ppt\exit_nicely ;
 
 
 $self_test_specs = [

@@ -1,6 +1,6 @@
 <?php
 
-namespace rsm_lisper\ppt;
+namespace ppt ;
 
 
 /**

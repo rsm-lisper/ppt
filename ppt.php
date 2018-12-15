@@ -4,14 +4,14 @@ namespace ppt ;
 
 
 /**
- * Almost like print_r but better, and it returns instead of printing.
+ * Almost like print_r but better, and it returns instead of printing!
  *
  * @param mixed $a Argument to format as a string.
  * @return string
  */
 function format_r ($a) { return
-        (is_null ($a) ? 'NULL' :
-         (is_bool ($a) ? ($a ? 'TRUE' : 'FALSE') :
+        ($a === null ? 'Null' :
+         (is_bool ($a) ? ($a ? 'TRUE' : 'false') :
           (is_string ($a) ? '"'. $a .'"' :
            (is_int ($a) || is_float ($a) ? (string) $a :
             print_r ($a, true))))) ;}
@@ -26,7 +26,7 @@ function format_r ($a) { return
  * @return bool|string Returns true on success or string describing problem.
  */
 function do_test ($name, $a, $b) { return
-    ($a === $b ? true :
+    ($a === $b ? '' :
      "
 ---[TEST: ". $name ."]---
 *** NOT EQUAL [A]: ". format_r ($a) ."
@@ -37,33 +37,25 @@ function do_test ($name, $a, $b) { return
 /**
  * @param string $group_name
  * @param array $group_tests
- * @return bool|string
+ * @return string
  */
 function test_group ($group_name, $group_tests) {
-    $all_true = true ;
     $details = '' ;
     foreach ($group_tests as $spec) {
-        $result = do_test ($spec[0], $spec[1], $spec[2]) ;
-        if (is_string ($result)) {
-            $all_true = false;
-            $details .= $result ;}}
-    return $all_true ? true :
+        $details .= do_test ($spec[0], $spec[1], $spec[2]) ;}
+    return $details === '' ? '' :
         "\n-[GROUP: ". $group_name ."]-". $details ;}
 
 
 /**
  * @param array $test_specs
- * @return bool|string
+ * @return string
  */
 function test_all ($test_specs) {
-    $all_true = true ;
     $details = '' ;
     foreach ($test_specs as $spec) {
-        $result = test_group (array_shift ($spec), $spec) ;
-        if (is_string ($result)) {
-            $all_true = false ;
-            $details .= $result ;}}
-    return $all_true ? true : $details ;}
+        $details .= test_group (array_shift ($spec), $spec) ;}
+    return $details === '' ? '' : $details ;}
 
 
 /**
@@ -71,7 +63,7 @@ function test_all ($test_specs) {
  * @return void
  */
 function exit_nicely ($test_result) {
-    if (is_string ($test_result)) {
+    if ($test_result !== '') {
         print ($test_result) ;
         exit (-1) ;}
     exit (0) ;}

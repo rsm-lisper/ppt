@@ -8,13 +8,13 @@ use function ppt\format_r, ppt\do_test, ppt\test_group,
 
 $self_test_specs = [
     ['format_r',
-     ['false', format_r (false), 'FALSE'],
+     ['false', format_r (false), 'false'],
      ['true', format_r (true), 'TRUE'],
-     ['null', format_r (null), 'NULL'],
+     ['null', format_r (null), 'Null'],
      ['string', format_r ('some text'), '"some text"'],
      ['int', format_r (1), '1']],
     ['do_test',
-     ['1 = 1', do_test ('t', 1, 1), true],
+     ['1 = 1', do_test ('t', 1, 1), ''],
      ['1 = 10.1', do_test ('t', 1, 10.1),
       "
 ---[TEST: t]---
@@ -33,19 +33,19 @@ $self_test_specs = [
 *** NOT EQUAL [A]: 1
 *** NOT EQUAL [B]: \"1\"
 "],
-     ['alfa = al.fa', do_test ('t', "alfa", "al"."fa"), true],
-     ['2 = 1+1', do_test ('t', 2, 1+1), true],
-     ['2.5*4.0 = 10.0', do_test ('t', 2.5 * 4.0, 10.0), true]],
+     ['alfa = al.fa', do_test ('t', "alfa", "al"."fa"), ''],
+     ['2 = 1+1', do_test ('t', 2, 1+1), ''],
+     ['2.5*4.0 = 10.0', do_test ('t', 2.5 * 4.0, 10.0), '']],
     ['test_group',
      ['is_int true',
       test_group ('is_int', [['t', is_int (1), true]]),
-      true],
+      ''],
      ['is_int false',
       test_group ('is_int', [['no', is_int ('no'), true]]),
       "
 -[GROUP: is_int]-
 ---[TEST: no]---
-*** NOT EQUAL [A]: FALSE
+*** NOT EQUAL [A]: false
 *** NOT EQUAL [B]: TRUE
 "]
     ]];

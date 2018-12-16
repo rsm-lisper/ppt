@@ -17,21 +17,30 @@ $self_test_specs = [
      ['1 = 1', do_test ('t', 1, 1), ''],
      ['1 = 10.1', do_test ('t', 1, 10.1),
       "
----[TEST: t]---
-*** NOT EQUAL [A]: 1
-*** NOT EQUAL [B]: 10.1
+--[ TEST: t ]--
+---- received: ----
+1
+---- expected: ----
+10.1
+-------------------
 "],
      ['1 = 1.1', do_test ('t', 1, 1.1),
       "
----[TEST: t]---
-*** NOT EQUAL [A]: 1
-*** NOT EQUAL [B]: 1.1
+--[ TEST: t ]--
+---- received: ----
+1
+---- expected: ----
+1.1
+-------------------
 "],
      ['1 = "1"', do_test ('t', 1, "1"),
       "
----[TEST: t]---
-*** NOT EQUAL [A]: 1
-*** NOT EQUAL [B]: \"1\"
+--[ TEST: t ]--
+---- received: ----
+1
+---- expected: ----
+\"1\"
+-------------------
 "],
      ['alfa = al.fa', do_test ('t', "alfa", "al"."fa"), ''],
      ['2 = 1+1', do_test ('t', 2, 1+1), ''],
@@ -43,10 +52,13 @@ $self_test_specs = [
      ['is_int false',
       test_group ('is_int', [['no', is_int ('no'), true]]),
       "
--[GROUP: is_int]-
----[TEST: no]---
-*** NOT EQUAL [A]: false
-*** NOT EQUAL [B]: TRUE
+-[[ GROUP: is_int ]]-
+--[ TEST: no ]--
+---- received: ----
+false
+---- expected: ----
+TRUE
+-------------------
 "]
     ]];
 

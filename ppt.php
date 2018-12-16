@@ -28,9 +28,12 @@ function format_r ($a) { return
 function do_test ($name, $a, $b) { return
     ($a === $b ? '' :
      "
----[TEST: ". $name ."]---
-*** NOT EQUAL [A]: ". format_r ($a) ."
-*** NOT EQUAL [B]: ". format_r ($b) ."
+--[ TEST: ". $name ." ]--
+---- received: ----
+". format_r ($a) ."
+---- expected: ----
+". format_r ($b) ."
+-------------------
 ") ;}
 
 
@@ -44,18 +47,19 @@ function test_group ($group_name, $group_tests) {
     foreach ($group_tests as $spec) {
         $details .= do_test ($spec[0], $spec[1], $spec[2]) ;}
     return $details === '' ? '' :
-        "\n-[GROUP: ". $group_name ."]-". $details ;}
+        "
+-[[ GROUP: ". $group_name ." ]]-". $details ;}
 
 
 /**
- * @param array $test_specs
+ * @param array $test_spec
  * @return string
  */
-function test_all ($test_specs) {
+function test_all ($test_spec) {
     $details = '' ;
-    foreach ($test_specs as $spec) {
+    foreach ($test_spec as $spec) {
         $details .= test_group (array_shift ($spec), $spec) ;}
-    return $details === '' ? '' : $details ;}
+    return $details ;}
 
 
 /**

@@ -3,4 +3,37 @@
 
 Php Pico Tester - minimalistyczna biblioteka do testów dla PHP.
 
-/(prace w toku)/
+* test_all
+główna funkcja wykonująca testy.
+
+#+BEGIN_EXAMPLE php
+string test_all ($test_spec)
+#+END_EXAMPLE
+
+** =$test_spec=
+specyfikacja testów, to tablica o strukturze:
+
+#+BEGIN_EXAMPLE php
+$test_spec = [
+    ['nazwa grupy',
+     ['nazwa testu', test, oczekiwany_wynik]]];
+
+/* example */
+$test_spec = [
+    ['grupa przykładowa',
+     ['test is_int true', is_int(10), true],
+     ['test is_int false', is_int(1.5), false]]];
+#+END_EXAMPLE
+
+** return
+w przypadku błędu, funkcja zwraca string z opisem problemu.
+jeżeli wszystkie testy przeszły poprawnie, funkcja zwraca pusty string.
+
+* exit_nicely
+
+#+BEGIN_EXAMPLE php
+void exit_nicely ($test_result)
+#+END_EXAMPLE
+
+funkcja pomocnicza, przyjmująca jako parametr wynik pracy funkcji =test_all=.
+wyświetla ona jeżeli jest co wyświelić, i dodatkowo jeśli jest błąd, kończąc przekazuje do systemu numer błędu =-1= (na wypadek gdybyśmy dalej jakimś sprytnym narzędziem więcej coś chcieli z wynikami testu robić).
